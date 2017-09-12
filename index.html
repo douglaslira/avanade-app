@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="App">
+
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-route.js"></script>
+    <script type="text/javascript">
+        var module = angular.module("App", ["ngRoute"]);
+        // ROUTE
+        module.config(function($routeProvider) {
+            $routeProvider.when("/", {
+                templateUrl: "main.html",
+                controller: "MainController"
+            }).when("/create", {
+                templateUrl: "create.html"
+            }).when("/about", {
+                templateUrl : "about.html"
+            });
+            $routeProvider.otherwise("/");
+        });
+        // CONTROLER
+        module.controller("MainController", ["$scope", "$interval", "hexadecimal", function($scope, $interval, hexadecimal){
+            $scope.name = "Douglas Lira";
+            $scope.show = true;
+            $scope.hex = hexadecimal.change(255);
+            $scope.hour = new Date().toLocaleTimeString();
+            $interval(function () {
+                $scope.hour = new Date().toLocaleTimeString();
+            }, 1000);
+
+        }]);
+        // SERVICE
+        module.service('hexadecimal', function() {
+            this.change = function (v) {
+                return v.toString(16);
+            }
+        });
+        // DIRECTIVE
+        module.directive("ngInverse", function(){
+            return {
+                restrict: "A",
+                link: function(scope, element, attr){
+                    var newName = "";
+                    scope.$watch('name', function (newValue, oldValue) {
+                        newName = newValue.split("").reverse().join("");
+                        element.val(newName);
+                    });
+                }
+            }
+        });
+    </script>
+</head>
+
+<body>
+    <fieldset>
+        <p><a href="#!/">MAIN</a> | <a href="#!/create">CREATE</a> | <a href="#!/about">ABOUT</a></p>
+        <div ng-view></div>
+    </fieldset>
+</body>
+</html>

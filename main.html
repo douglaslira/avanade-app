@@ -1,0 +1,13 @@
+<fieldset ng-controller="MainController">
+    <form novalidate name="formApp" ng-submit="sendForm()">
+        <p>My name:</p>
+        <input type="text" name="name" ng-model="name">
+        <p>Inverse name:</p>
+        <input ng-inverse type="text" ng-model="name">
+        <button type="submit">Save</button>
+    </form>
+    <p>Hour</p>
+    <p>{{hour}}</p>
+    <p>Hexadecimal Service</p>
+    <p>{{hex}}</p>
+</fieldset>
