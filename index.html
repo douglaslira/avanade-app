@@ -21,7 +21,10 @@
         // CONTROLER
         module.controller("MainController", ["$scope", "$interval", "hexadecimal", function($scope, $interval, hexadecimal){
             $scope.name = "Douglas Lira";
-            $scope.show = true;
+            $scope.list = ["A", "B", "C"];
+            $scope.sendForm = function(){
+                alert("saved");
+            };
             $scope.hex = hexadecimal.change(255);
             $scope.hour = new Date().toLocaleTimeString();
             $interval(function () {

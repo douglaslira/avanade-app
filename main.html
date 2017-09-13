@@ -1,4 +1,7 @@
 <fieldset ng-controller="MainController">
+    <ul>
+        <li ng-repeat="item in list">{{item}}</li>
+    </ul>
     <form novalidate name="formApp" ng-submit="sendForm()">
         <p>My name:</p>
         <input type="text" name="name" ng-model="name">
